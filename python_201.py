@@ -24,19 +24,32 @@ while True:
     # print(type(response))
 
     # TODO: print out json data
-    print("Name :")
-    for form in response.get("forms"): # character's name/s
-        print(f'\t> {form.get("name")}')
-    print()
+    print(f"Name   > {response.get('name')}")  # character's name
     print(f"Height > {response.get('height')}")  # character's height
     print(f"Weight > {response.get('weight')}")  # character weight
     print()
-    print("Abilities :")  # list of abilities
-    for ability in response.get("abilities"):
-        print(f"\t> {ability.get('ability').get('name')}")
+    print("forms :")
+    forms = response.get("forms")
+    if len(forms) > 0:
+        for form in forms:  # character's form/s
+            print(f'\t> {form.get("name")}')
+    else:
+        print("\t> None")
+    print()
+    print("Abilities :")  # list of abilities'
+    abilities = response.get("abilities")
+    if len(abilities) > 0:
+        for ability in abilities:
+            print(f"\t> {ability.get('ability').get('name')}")
+    else:
+        print("\t> None")
     print()
     print("Items :")  # list of held items
-    for item in response.get("held_items"):
-        print(f"\t> {item.get('item').get('name')}")
+    items = response.get("held_items")
+    if len(items) > 0:
+        for item in items:
+            print(f"\t> {item.get('item').get('name')}")
+    else:
+        print("\t> None")
 
     print("\n")
