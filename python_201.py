@@ -52,4 +52,4 @@ while True:
     else:
         print("\t> None")
 
-    print("\n")
+    print("-" * 100, "\n")
