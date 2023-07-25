@@ -5,7 +5,7 @@ import json
 
 while True:
     # TODO: ask for user input => which pokemon
-    user_input = input("Which pokemon do you like? ")
+    user_input = input("Which pokemon do you like? ").lower()
     # user_input = "ditto"
 
     # TODO: create a dynamic url
@@ -17,7 +17,7 @@ while True:
     # TODO: check if response is valid
     if response.status_code != 200:
         print("Character not found\n\n")
-        # continue
+        continue
 
     # TODO: convert json data
     response = response.json()
