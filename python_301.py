@@ -51,7 +51,7 @@ while True:
     # TODO: for each action ask for user input
     account_req = input("1.Available account\n2.Opening new account\n3.show accounts\nEnter intended number: ")
     try:
-        account_req = int(account_req)
+        account_req = float(account_req)
     except Exception:
         print("Invalid value")
     else:
@@ -61,14 +61,14 @@ while True:
             if account:
                 operation = input("1.withdraw\n2.deposit\n3.show balance\nEnter operation number: ")
                 try:
-                    operation = int(operation)
+                    operation = float(operation)
                 except Exception:
                     print("Invalid value")
                 else:
                     if operation == 1:
                         amount = input("How much do you wanna withdraw ? ")
                         try:
-                            amount = int(amount)
+                            amount = float(amount)
                         except:
                             print("Invalid value")
                         else:
@@ -76,7 +76,7 @@ while True:
                     elif operation == 2:
                         amount = input("How much do you wanna deposit ? ")
                         try:
-                            amount = int(amount)
+                            amount = float(amount)
                         except:
                             print("Invalid value")
                         else:
