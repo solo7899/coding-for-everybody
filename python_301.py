@@ -17,6 +17,7 @@ class Banking:
             print(f"\nwithdrawing {amount}$ from {self.name} account.")
             self.balance -= amount
             print('Done.')
+            self.logging("withdraw", f"-{amount}")
         else:
             print('\naccount balance is insufficient.')
         self.show_balance()
@@ -27,6 +28,7 @@ class Banking:
             print(f'\nadding {amount}$ to the {self.name} balance.')
             self.balance += amount
             print('Done.')
+            self.logging('deposit', f"+{amount}")
         else:
             print("\ninvalid value.")
         self.show_balance()
@@ -45,7 +47,18 @@ class Banking:
         print(f"Your balance is : {self.balance}")
         print()
         
+# TODO: adding log
+    def logging(self, operation, amount):
+        with open(f"{self.name}.txt", 'a') as f:
+            f.write(f"{operation} ---------------------------> {amount}\n")
         
+# TODO: showing log file
+    def show_log(self):
+        print()
+        with open(f"{self.name}.txt", 'r') as f:
+            lines = f.readlines()
+        for line in lines:
+            print(line)
 
 # TODO: put it in a while loop
 while True:
@@ -62,7 +75,7 @@ while True:
             if account:
                 password_input = input("Enter your password: ")
                 if password_input == account.password:
-                    operation = input("\n1.withdraw\n2.deposit\n3.show balance\nEnter operation number: ")
+                    operation = input("\n1.withdraw\n2.deposit\n3.show balance\n4.show log\nEnter operation number: ")
                     try:
                         operation = float(operation)
                     except Exception:
@@ -86,6 +99,8 @@ while True:
                                 account.deposit(amount)
                         elif operation == 3:
                             account.show_balance()
+                        elif operation == 4:
+                            account.show_log()
                         else:
                             print("Invalid value")
                 else:
