@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 
 import requests
-import json
 
 while True:
     # TODO: ask for user input => which pokemon
