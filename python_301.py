@@ -6,8 +6,9 @@ class Banking:
     
     accounts = {}
     
-    def __init__(self, name):
+    def __init__(self, name, password):
         self.name = name
+        self.password =  password
         self.balance = 0
 
 # TODO: add withdraw function
@@ -59,38 +60,46 @@ while True:
             account_name = input('Enter name of your account: ')
             account = Banking.accounts.get(account_name)
             if account:
-                operation = input("1.withdraw\n2.deposit\n3.show balance\nEnter operation number: ")
-                try:
-                    operation = float(operation)
-                except Exception:
-                    print("Invalid value")
-                else:
-                    if operation == 1:
-                        amount = input("How much do you wanna withdraw ? ")
-                        try:
-                            amount = float(amount)
-                        except:
-                            print("Invalid value")
-                        else:
-                            account.withdraw(amount)
-                    elif operation == 2:
-                        amount = input("How much do you wanna deposit ? ")
-                        try:
-                            amount = float(amount)
-                        except:
-                            print("Invalid value")
-                        else:
-                            account.deposit(amount)
-                    elif operation == 3:
-                        account.show_balance()
-                    else:
+                password_input = input("Enter your password: ")
+                if password_input == account.password:
+                    operation = input("\n1.withdraw\n2.deposit\n3.show balance\nEnter operation number: ")
+                    try:
+                        operation = float(operation)
+                    except Exception:
                         print("Invalid value")
+                    else:
+                        if operation == 1:
+                            amount = input("\nHow much do you wanna withdraw ? ")
+                            try:
+                                amount = float(amount)
+                            except:
+                                print("Invalid value")
+                            else:
+                                account.withdraw(amount)
+                        elif operation == 2:
+                            amount = input("\nHow much do you wanna deposit ? ")
+                            try:
+                                amount = float(amount)
+                            except:
+                                print("Invalid value")
+                            else:
+                                account.deposit(amount)
+                        elif operation == 3:
+                            account.show_balance()
+                        else:
+                            print("Invalid value")
+                else:
+                    print("Password is not valid!!\n")    
             else:
                 print("Account Not Found.")
+                    
         elif account_req == 2:
             new_account_name = input("What's your new account name? ")
-            new_account = Banking(new_account_name)
-            Banking.accounts[new_account_name] = Banking(new_account_name)
+            new_account_password = input("Enter a password: (length must be more than 3)\n ")
+            while len(new_account_password) < 3:
+                new_account_password = input("Enter a password: (length must be more than 3)\n ")
+            new_account = Banking(new_account_name, new_account_password)
+            Banking.accounts[new_account_name] = new_account
         elif account_req == 3:
             Banking.show_accounts()
         else:
