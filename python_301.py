@@ -37,8 +37,11 @@ class Banking:
     @classmethod
     def show_accounts(self):
         print()
-        for i, k in enumerate(Banking.accounts):
-            print(f"{i}. {k}")
+        if Banking.accounts:
+            for i, k in enumerate(Banking.accounts):
+                print(f"{i}. {k}")
+        else:
+            print("No account registered.")
         print()
         
 # TODO: show account balance
@@ -63,7 +66,7 @@ class Banking:
 # TODO: put it in a while loop
 while True:
     # TODO: for each action ask for user input
-    account_req = input("1.Available account\n2.Opening new account\n3.show accounts\nEnter intended number: ")
+    account_req = input("1.Available account\n2.Opening new account\n3.show accounts\n4.exit\nEnter intended number: ")
     try:
         account_req = float(account_req)
     except Exception:
@@ -75,34 +78,38 @@ while True:
             if account:
                 password_input = input("Enter your password: ")
                 if password_input == account.password:
-                    operation = input("\n1.withdraw\n2.deposit\n3.show balance\n4.show log\nEnter operation number: ")
-                    try:
-                        operation = float(operation)
-                    except Exception:
-                        print("Invalid value")
-                    else:
-                        if operation == 1:
-                            amount = input("\nHow much do you wanna withdraw ? ")
-                            try:
-                                amount = float(amount)
-                            except:
-                                print("Invalid value")
-                            else:
-                                account.withdraw(amount)
-                        elif operation == 2:
-                            amount = input("\nHow much do you wanna deposit ? ")
-                            try:
-                                amount = float(amount)
-                            except:
-                                print("Invalid value")
-                            else:
-                                account.deposit(amount)
-                        elif operation == 3:
-                            account.show_balance()
-                        elif operation == 4:
-                            account.show_log()
-                        else:
+                    while True:
+                        operation = input("\n1.withdraw\n2.deposit\n3.show balance\n4.show log\n5.quit account\nEnter operation number: ")
+                        try:
+                            operation = float(operation)
+                        except Exception:
                             print("Invalid value")
+                        else:
+                            if operation == 1:
+                                amount = input("\nHow much do you wanna withdraw ? ")
+                                try:
+                                    amount = float(amount)
+                                except:
+                                    print("Invalid value")
+                                else:
+                                    account.withdraw(amount)
+                            elif operation == 2:
+                                amount = input("\nHow much do you wanna deposit ? ")
+                                try:
+                                    amount = float(amount)
+                                except:
+                                    print("Invalid value")
+                                else:
+                                    account.deposit(amount)
+                            elif operation == 3:
+                                account.show_balance()
+                            elif operation == 4:
+                                account.show_log()
+                            elif operation == 5:
+                                print("\n goodbye\n")
+                                break
+                            else:
+                                print("Invalid value")
                 else:
                     print("Password is not valid!!\n")    
             else:
@@ -117,5 +124,8 @@ while True:
             Banking.accounts[new_account_name] = new_account
         elif account_req == 3:
             Banking.show_accounts()
+        elif account_req == 4:
+            print("have a good day.")
+            break
         else:
             print('Request is not valid.')
