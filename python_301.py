@@ -4,13 +4,13 @@
 # TODO: create a banking class
 class Banking:
     
-    accounts = {}
+    __accounts = {}
     
     def __init__(self, name, password):
         self.name = name
         self.password =  password
         self.balance = 0
-        Banking.accounts[self.name] = self
+        Banking.__accounts[self.name] = self
         
 
     # TODO: add withdraw function
@@ -37,10 +37,10 @@ class Banking:
             
     # TODO: show current accounts
     @classmethod
-    def show_accounts(self):
+    def show_accounts(cls):
         print()
-        if Banking.accounts:
-            for i, k in enumerate(Banking.accounts):
+        if cls.__accounts:
+            for i, k in enumerate(Banking.__accounts):
                 print(f"{i}. {k}")
         else:
             print("No account registered.")
@@ -64,6 +64,11 @@ class Banking:
             lines = f.readlines()
         for line in lines:
             print(line)
+            
+    # TODO: return wanted account
+    @classmethod
+    def return_account(cls, name):
+        return cls.__accounts.get(name)
 
 # TODO: put it in a while loop
 while True:
@@ -76,7 +81,7 @@ while True:
     else:
         if account_req == 1:
             account_name = input('Enter name of your account: ')
-            account = Banking.accounts.get(account_name)
+            account = Banking.return_account(account_name)
             if account:
                 password_input = input("Enter your password: ")
                 if password_input == account.password:
@@ -123,7 +128,6 @@ while True:
             while len(new_account_password) < 3:
                 new_account_password = input("Enter a password: (length must be more than 3)\n ")
             new_account = Banking(new_account_name, new_account_password)
-            # Banking.accounts[new_account_name] = new_account
         elif account_req == 3:
             Banking.show_accounts()
         elif account_req == 4:
