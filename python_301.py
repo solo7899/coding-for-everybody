@@ -10,6 +10,8 @@ class Banking:
         self.name = name
         self.password =  password
         self.balance = 0
+        Banking.accounts[self.name] = self
+        
 
 # TODO: add withdraw function
     def withdraw(self, amount):
@@ -66,7 +68,7 @@ class Banking:
 # TODO: put it in a while loop
 while True:
     # TODO: for each action ask for user input
-    account_req = input("1.Available account\n2.Opening new account\n3.show accounts\n4.exit\nEnter intended number: ")
+    account_req = input("1.Available account\n2.creating new account\n3.show accounts\n4.exit\nEnter intended number: ")
     try:
         account_req = float(account_req)
     except Exception:
@@ -121,7 +123,7 @@ while True:
             while len(new_account_password) < 3:
                 new_account_password = input("Enter a password: (length must be more than 3)\n ")
             new_account = Banking(new_account_name, new_account_password)
-            Banking.accounts[new_account_name] = new_account
+            # Banking.accounts[new_account_name] = new_account
         elif account_req == 3:
             Banking.show_accounts()
         elif account_req == 4:
