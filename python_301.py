@@ -13,7 +13,7 @@ class Banking:
         Banking.accounts[self.name] = self
         
 
-# TODO: add withdraw function
+    # TODO: add withdraw function
     def withdraw(self, amount):
         if amount <= self.balance:
             print(f"\nwithdrawing {amount}$ from {self.name} account.")
@@ -24,7 +24,7 @@ class Banking:
             print('\naccount balance is insufficient.')
         self.show_balance()
 
-# TODO: add deposit function
+    # TODO: add deposit function
     def deposit(self, amount):
         if amount > 0:
             print(f'\nadding {amount}$ to the {self.name} balance.')
@@ -35,7 +35,7 @@ class Banking:
             print("\ninvalid value.")
         self.show_balance()
             
-# TODO: show current accounts
+    # TODO: show current accounts
     @classmethod
     def show_accounts(self):
         print()
@@ -46,18 +46,18 @@ class Banking:
             print("No account registered.")
         print()
         
-# TODO: show account balance
+    # TODO: show account balance
     def show_balance(self):
         print()
         print(f"Your balance is : {self.balance}")
         print()
         
-# TODO: adding log
+    # TODO: adding log
     def logging(self, operation, amount):
         with open(f"{self.name}.txt", 'a') as f:
             f.write(f"{operation} ---------------------------> {amount}\n")
         
-# TODO: showing log file
+    # TODO: showing log file
     def show_log(self):
         print()
         with open(f"{self.name}.txt", 'r') as f:
